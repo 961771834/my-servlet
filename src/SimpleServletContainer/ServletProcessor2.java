@@ -10,7 +10,7 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.net.URLStreamHandler;
 
-public class ServletProcessor1 {
+public class ServletProcessor2 {
     public void process (MyRequest request,MyResponse response){
         String  uri = request.getUri();
         String  servletName = uri.substring(uri.lastIndexOf("/")+1);
@@ -25,6 +25,7 @@ public class ServletProcessor1 {
 
 
         try {
+            System.out.println("ServletProcessor2 创建 classLoader");
             String repository = (new URL("File",null,classPath.getCanonicalPath()+File.separator).toString());
             System.out.println("=======");
             System.out.println(repository);
@@ -42,9 +43,11 @@ public class ServletProcessor1 {
         }
 
         Servlet  servlet = null;
+        RequestFacade requestFacade = new RequestFacade(request);
+        ResponseFacade responseFacade = new ResponseFacade(response);
         try {
             servlet = (Servlet) myClass.newInstance();
-            servlet.service((ServletRequest) request,(ServletResponse) response);
+            servlet.service(requestFacade,responseFacade);
         } catch (Exception e) {
             e.printStackTrace();
         } catch (Throwable e) {
