@@ -1,4 +1,4 @@
-package HttpServer;
+package SimpleServletContainer;
 
 import java.io.File;
 import java.io.IOException;
@@ -54,7 +54,18 @@ public class MyHttpServerDemo {
                 // create response object
                 MyResponse response = new MyResponse(output);
                 response.setRequest(request);
-                response.sendStaticResource();
+
+
+                // check if this is a request for a servlet or a static resource
+                // a request for a servlet begins with "/servlet"
+
+                if(request.getUri().startsWith("/servlet/")){
+                    ServletProcessor1 processor = new ServletProcessor1();
+                    processor.process(request,response);
+                }else{
+                    StaticResourceProcessor processor = new StaticResourceProcessor();
+                    processor.process(request,response);
+                }
 
 
                 // close the socket
