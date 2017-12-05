@@ -46,8 +46,9 @@ public class ServletProcessor2 {
         RequestFacade requestFacade = new RequestFacade(request);
         ResponseFacade responseFacade = new ResponseFacade(response);
         try {
+            System.out.println("httpServerDemo2");
             servlet = (Servlet) myClass.newInstance();
-            servlet.service(requestFacade,responseFacade);
+            servlet.service((ServletRequest) requestFacade,(ServletResponse) responseFacade);
         } catch (Exception e) {
             e.printStackTrace();
         } catch (Throwable e) {
