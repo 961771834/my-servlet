@@ -4,6 +4,7 @@ package ex03.connector.http;
 
 import ex03.ServletProcessor;
 import ex03.StaticResourceProcessor;
+import org.apache.catalina.util.StringManager;
 
 import java.net.Socket;
 import java.io.OutputStream;
@@ -13,7 +14,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 
 
-import org.apache.catalina.util.StringManager;
 
 /* this class used to be called HttpServer */
 public class HttpProcessor {
@@ -37,7 +37,7 @@ public class HttpProcessor {
     }
 
     protected StringManager sm =
-            StringManager.getManager("ex03.pyrmont.connector.http");
+            StringManager.getManager("ex03.connector.http");
 
     public void process(Socket socket) {
         SocketInputStream input = null;
@@ -91,7 +91,7 @@ public class HttpProcessor {
     private void parseHeaders(SocketInputStream input)
             throws IOException, ServletException {
         while (true) {
-            HttpHeader header = new HttpHeader();;
+            HttpHeader header = new HttpHeader();
 
             // Read the next header
             input.readHeader(header);

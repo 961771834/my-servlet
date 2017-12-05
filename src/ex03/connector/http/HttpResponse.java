@@ -2,6 +2,7 @@ package ex03.connector.http;
 
 import ex03.connector.ResponseStream;
 import ex03.connector.ResponseWriter;
+import org.apache.catalina.util.CookieTools;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.Cookie;
@@ -269,9 +270,9 @@ public class HttpResponse implements HttpServletResponse {
             Iterator items = cookies.iterator();
             while (items.hasNext()) {
                 Cookie cookie = (Cookie) items.next();
-//                outputWriter.print(CookieTools.getCookieHeaderName(cookie));
+                outputWriter.print(CookieTools.getCookieHeaderName(cookie));
                 outputWriter.print(": ");
-//                outputWriter.print(CookieTools.getCookieHeaderValue(cookie));
+                outputWriter.print(CookieTools.getCookieHeaderValue(cookie));
                 outputWriter.print("\r\n");
             }
         }
